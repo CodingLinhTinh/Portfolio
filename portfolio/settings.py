@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY='django-insecure-5r!q6a2o0%oo%ojzs+0x%9jb$+h4%c4sntyy3)nv8mulv8$ng='
+SECRET_KEY=''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,11 +77,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-DEFUALT_FROM_EMAIL='fisishop.io@gmail.com'
+DEFUALT_FROM_EMAIL=''
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER='fisishop.io@gmail.com'
-EMAIL_HOST_PASSWORD='Ngoc2002' 
+EMAIL_HOST_USER=''
+EMAIL_HOST_PASSWORD='' 
 EMAIL_USE_TLS=True
 
 # Database
