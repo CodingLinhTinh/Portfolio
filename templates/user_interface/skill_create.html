@@ -1,0 +1,167 @@
+{% extends "user_interface/layout_create.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{% url 'skillset' %}">
+                <!-- Security Token -->
+                {% csrf_token %}
+                <!-- ---------------------- FORM --------------------------->
+        
+                <span class="contact100-form-title">
+                    Kỹ năng của {{ user }}
+                </span>
+                <!-- <div style="margin-left: auto; margin-right: 2%;">
+                    <a href="{% url 'logout' %}" class="btn btn-info"> Logout </a>
+                </div> -->
+                <!-- ---------------------- Skillset Details FORM --------------------------->
+                <br>
+                
+                <!-- TITLE  -->
+				<label class="label-input100" for="first-name">Tên kỹ năng*</label>
+				<div class="wrap-input100">
+                    {% render_field skillFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Django" %}
+					<!-- <input  {% if skillFORM.title.is_bound %} value="{{ skillFORM.title.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Imagelink Link -->
+				<label class="label-input100" for="email">Logo kỹ năng</label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Your skillset logo link" %}
+
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Skillrank -->
+				<label class="label-input100" for="email">Chọn cấp độ kỹ năng này của bạn</label>
+				<div>
+                    {% render_field skillFORM.skillrank %}
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.skillrank.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                 <!-- Description -->
+				<!-- <label class="label-input100" for="message">Description </label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about your skillset and experience" %}
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div> -->
+                
+                <!-- <ol id="skillsets_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_skills" class="btn btn-primary" style="margin: 20px;">Add More Skillsets</button> -->
+                
+                
+
+                <!-- <input type="submit" value="submit"> -->
+				<div class="container-contact100-form-btn">
+                    
+					<button class="contact100-form-btn" type="submit">
+						<span>
+                            Thêm nữa
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button>
+				</div>
+
+                <ol class="container" >
+                    Phần trước của bạn:
+                    {% for item in skillsets %}
+                        <li><h2>{{ item.title }}</h2></li>
+                        <li><p> Xếp hạng kỹ năng của bạn: {{ item.skillrank }}</p></li>
+                        <li><img src="{{ item.imagelink }}" alt="{{ item.title }}" height="100px" width="100px"></li>
+                        <br>
+                    {% endfor %}
+                </ol>
+			</form>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-23581568-13');
+  
+    document.addEventListener('DOMContentLoaded', function() {
+      const submit = document.querySelector('#submit');
+    
+      document.querySelector('#addmore_skills').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `<!-- TITLE  -->
+				<label class="label-input100" for="first-name">Skillset Name*</label>
+				<div class="wrap-input100">
+                    {% render_field skillFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Django" %}
+					<!-- <input  {% if skillFORM.title.is_bound %} value="{{ skillFORM.title.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Imagelink Link -->
+				<label class="label-input100" for="email">Logo-link to the Skillset</label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Your skillset logo link" %}
+
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Skillrank -->
+				<label class="label-input100" for="email">Select your this skill level</label>
+				<div>
+                    {% render_field skillFORM.skillrank %}
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.skillrank.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                 <!-- Description -->
+				<!-- <label class="label-input100" for="message">Description </label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about your skillset and experience" %}
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div> -->` 
+        document.querySelector('#skillsets_added').append(li);
+        return false;
+    }
+
+
+ 
+  
+    });
+  </script>
+{% endblock %}
+

@@ -1,0 +1,172 @@
+{% extends "user_interface/layout_create.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{% url 'experience' %}">
+                <!-- Security Token -->
+                {% csrf_token %}
+                <!-- ---------------------- FORM --------------------------->
+        
+                <span class="contact100-form-title">
+                    Thông tin kinh nghiệm của {{ user }}
+                </span>
+                <!-- <div style="margin-left: auto; margin-right: 2%;">
+                    <a href="{% url 'logout' %}" class="btn btn-info"> Logout </a>
+                </div> -->
+                
+                <!-- ---------------------- Experience FORM --------------------------->
+                <br>
+                <!-- {{ expForm.as_p }} -->
+                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Vai trò và năm kinh nghiệm*</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" %}
+
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" {% if expFORM.title.is_bound %} value="{{ expFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Năm  *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.the_year class="input100" type="text" name="the_year" placeholder="2022" %}
+
+                    <!-- <input class="input100" type="text" name="the_year" placeholder="2021" {% if expFORM.the_year.is_bound %} value="{{ expFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Tên công ty *</label>
+                <div class="wrap-input100">
+                    {% render_field expFORM.institute class="input100" type="text" name="institute" placeholder="Google" %}
+                    <!-- <input class="input100" type="text" name="institute" placeholder="Microsoft" {% if expFORM.institute.is_bound %} value="{{ expFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Mô tả kinh nghiệm </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về kinh nghiệm làm việc này " %}
+
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if expFORM.decription.is_bound %} value="{{ expFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- <ol id="experiences_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_exp" class="btn btn-primary" style="margin: 20px;">Add More Experience</button> -->
+
+                <br><br>
+                <ol>
+                    Phần trước
+                    {% for item in experience %}
+                        <li><h2>{{ item.title }}</h2></li>
+                        <li><p>{{ item.institute }} in {{ item.the_year }}</p></li>
+                        <br>
+                    {% endfor %}
+                </ol>
+
+                
+
+                <!-- <input type="submit" value="submit"> -->
+				<div class="container-contact100-form-btn">
+                    <a href="{% url 'project' %}">
+					<button class="contact100-form-btn" type="submit">
+						<span>
+                            Thêm nữa
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button></a>
+				</div>
+                 
+
+			</form>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-23581568-13');
+  
+    document.addEventListener('DOMContentLoaded', function() {
+      const submit = document.querySelector('#submit');
+    
+      document.querySelector('#addmore_exp').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Experienced Role and Year*</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" %}
+
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" {% if expFORM.title.is_bound %} value="{{ expFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Year  *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.the_year class="input100" type="text" name="the_year" placeholder="2021" %}
+
+                    <!-- <input class="input100" type="text" name="the_year" placeholder="2021" {% if expFORM.the_year.is_bound %} value="{{ expFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Company Name  *</label>
+                <div class="wrap-input100">
+                    {% render_field expFORM.institute class="input100" type="text" name="institute" placeholder="Microsoft" %}
+                    <!-- <input class="input100" type="text" name="institute" placeholder="Microsoft" {% if expFORM.institute.is_bound %} value="{{ expFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience " %}
+
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if expFORM.decription.is_bound %} value="{{ expFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>`
+        document.querySelector('#experiences_added').append(li);
+        return false;
+    }
+    
+  
+    });
+  </script>
+{% endblock %}
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PORTFOLIO MAKER</title>
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dist/css/style.css' %}">
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script src="https://kit.fontawesome.com/f2457b02ad.js" crossorigin="anonymous"></script>
+</head>
+<body class="is-boxed has-animations">
+    <div class="body-wrap boxed-container">
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+                            <a href="#">
+                                <img class="header-logo-image asset-light" src="{% static 'dist/images/logo-light.svg' %}" alt="Logo">
+                                <img class="header-logo-image asset-dark" src="{% static 'dist/images/logo-dark.svg' %}" alt="Logo">
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-inner">
+                        <div class="hero-copy">
+                            <h1 class="hero-title mt-0">Tự tạo cho bản thân một PORTFOLIO</h1>
+                            <p class="hero-paragraph">Bạn là sinh viên hay người đã có kinh nghiệm; muốn phát triển, bạn cần một trang web. Đó là cơ hội để bạn thiết lập Portfolio( Sự hiện diện trực tuyến ), gây ấn tượng với nhà tuyển dụng và cung cấp thứ gì đó giúp bạn khác biệt với đống hồ sơ xin việc tĩnh mà mọi người đều có.</p>
+                            <div class="hero-cta">
+                                <a class="button button-primary" href="{% url 'register' %}">Bắt Đầu Nào</a>
+                                <div class="lights-toggle">
+                                    <input id="lights-toggle" type="checkbox" name="lights-toggle" class="switch" checked="checked">
+                                    <label for="lights-toggle" class="text-xs"><span>Chế độ <span class="label-text">dark</span></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-media">
+                            <div class="header-illustration">
+                                <img class="header-illustration-image asset-light" src="{% static 'dist/images/header-illustration-light.svg' %}" alt="Header illustration">
+                                <img class="header-illustration-image asset-dark" src="{% static 'dist/images/header-illustration-dark.svg' %}" alt="Header illustration">
+                            </div>
+                            <div class="hero-media-illustration">
+                                <img class="hero-media-illustration-image asset-light" src="{% static 'dist/images/hero-media-illustration-light.svg' %}" alt="Hero media illustration">
+                                <img class="hero-media-illustration-image asset-dark" src="{% static 'dist/images/hero-media-illustration-dark.svg' %}" alt="Hero media illustration">
+                            </div>
+                            <div class="hero-media-container">
+                                <img class="hero-media-image asset-light" width="550" height="450" src="{% static 'dist/images/light_portfolio.png' %}" alt="Hero media">
+                                <img class="hero-media-image asset-dark" width="550" height="450" src="{% static 'dist/images/dark_portfolio.png' %}" alt="Hero media">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features section">
+                <div class="container">
+                    <div class="features-inner section-inner has-bottom-divider">
+                        <div class="features-header text-center">
+                            <div class="container-sm">
+                                <h2 class="section-title mt-0">The Portfolio Maker</h2>
+                                <p class="section-paragraph">Muốn có toàn quyền kiểm soát công việc của mình, bạn nên đầu tư vào việc tạo và duy trì portfolio của riêng mình. Trang web của bạn phải trở thành một công cụ hỗ trợ có giá trị mà bạn sử dụng để thu hút khách hàng và giúp những người tuyển dụng liên hệ với bạn.</p>
+                                <div class="features-image">
+                                    <img class="features-illustration asset-dark" src="{% static 'dist/images/features-illustration-dark.svg' %}" alt="Feature illustration">
+                                    <img class="features-box asset-dark" src="{% static 'dist/images/features-box-dark.svg' %}" alt="Feature box">
+                                    <img class="features-illustration asset-dark" width="728" height="458" src="{% static 'dist/images/PORTFOLIO SITE.png' %}" alt="Feature illustration top">
+                                    <img class="features-illustration asset-light" src="{% static 'dist/images/features-illustration-light.svg' %}" alt="Feature illustration">
+                                    <img class="features-box asset-light" src="{% static 'dist/images/features-box-light.svg' %}" alt="Feature box">
+                                    <img class="features-illustration asset-light" width="750" height="450" src="{% static 'dist/images/PORTFOLIO SITE swap.png' %}" alt="Feature illustration top">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="features-wrap">
+                            <div class="feature is-revealing">
+                                <div class="feature-inner">
+                                    <div class="feature-icon">
+                                        <img class="asset-light" src="{% static 'dist/images/feature-01-light.svg' %}" alt="Feature 01">
+                                        <img class="asset-dark" src="{% static 'dist/images/feature-01-dark.svg' %}" alt="Feature 01">
+                                    </div>
+                                    <div class="feature-content">
+                                        <h3 class="feature-title mt-0"> 1. Đăng Ký</h3>
+                                        <p class="text-sm mb-0">Bước đầu tiên để bắt đầu với trang Portfolio của bạn là tạo tài khoản của bạn trên "The Portfolio Maker".</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature is-revealing">
+                                <div class="feature-inner">
+                                    <div class="feature-icon">
+                                        <img class="asset-light" src="{% static 'dist/images/feature-02-light.svg' %}" alt="Feature 02">
+                                        <img class="asset-dark" src="{% static 'dist/images/feature-02-dark.svg' %}" alt="Feature 02">
+                                    </div>
+                                    <div class="feature-content">
+                                        <h3 class="feature-title mt-0"> 2. Nhập thông tin chi tiết</h3>
+                                        <p class="text-sm mb-0">Thứ hai, bạn cần nhập các thông tin chi tiết mà bạn muốn người khác biết về bạn. Một số thông tin chi tiết về giáo dục, kinh nghiệm, dự án và bộ kỹ năng của bạn.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature is-revealing">
+                                <div class="feature-inner">
+                                    <div class="feature-icon">
+                                        <img class="asset-light" src="{% static 'dist/images/feature-03-light.svg' %}" alt="Feature 03">
+                                        <img class="asset-dark" src="{% static 'dist/images/feature-03-dark.svg' %}" alt="Feature 03">
+                                    </div>
+                                    <div class="feature-content">
+                                        <h3 class="feature-title mt-0"> 3. Hoàn thành portfolio của bạn</h3>
+                                        <p class="text-sm mb-0">Sau khi hoàn thành bạn có thể xem danh mục đầu tư của mình và cập nhật bất cứ lúc nào bạn cần. HURRAYS! Nhận một liên kết có thể chia sẻ và khoe với mọi người. CONGRATS!!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta section">
+                <div class="container-sm">
+                    <div class="cta-inner section-inner">
+                        <div class="cta-header text-center">
+                            <h2 class="section-title mt-0">Nhận trang Portfolio của bạn và nổi bần bật!</h2>
+                            <p class="section-paragraph">Charles Pooley, người sáng lập và giám đốc điều hành của Workfolio cho biết: “Thị trường việc làm là một nơi cực kỳ đáng sợ ngay bây giờ với cả tư cách là một người tìm việc — nhưng một trang web cá nhân cung cấp một số điều quan trọng để cải thiện tỷ lệ nhận việc của bạn”.</p>
+                            <div class="cta-cta">
+                                <a class="button button-primary" href="{% url 'register' %}">Bắt Đầu Nào</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer has-top-divider">
+            <div class="container">
+                <div class="site-footer-inner">
+                    <div class="brand footer-brand">
+                        <a href="#">
+                            <img class="asset-light" src="{% static 'dist/images/logo-light.svg' %}" alt="Logo">
+                            <img class="asset-dark" src="{% static 'dist/images/logo-dark.svg' %}" alt="Logo">
+                        </a>
+                    </div>
+                    <ul class="footer-links list-reset">
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">About us</a>
+                        </li>
+                    </ul>
+                    <ul class="footer-social-links list-reset">
+                        <li>
+                            <a href="https://www.facebook.com/geek.quach">
+                                <span class="screen-reader-text">Facebook</span>
+                                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#FFF"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/CodingLinhTinh">
+                                <span class="screen-reader-text">GitHub</span>
+                                <i class="fa-brands fa-github" width="16" height="16"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="footer-copyright">&copy; BIPLOV, all rights reserved</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'dist/js/main.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!-- <form method="POST" enctype="multipart/form-data">
+     Security Token 
+    {% csrf_token %}
+
+     Using the Formset 
+    {{ introFORM.as_p }}
+    {{ eduFORM.as_p }}
+    {{ expFORM.as_p }}
+    {{ projFORM.as_p }}
+    
+
+    <h2>Skill Form 1</h2>
+    {{ skillFORM.as_p }}
+
+    <h2>Skill Form 2</h2>
+    {{ skillFORM.as_p }}
+
+    <h2>Skill Form 3</h2>
+    {{ skillFORM.as_p }}
+
+    <input type="submit" value="SUBMIT">
+
+</form> -->
+
+{% load widget_tweaks %}
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <title>TẠO Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'createForm/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/bootstrap/css/bootstrap.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/fonts/iconic/css/material-design-iconic-font.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/animate/animate.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/css-hamburgers/hamburgers.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/animsition/css/animsition.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/select2/select2.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm//daterangepicker/daterangepicker.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/css/util.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'createForm/css/main.css'%}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form class="contact100-form validate-form" enctype="multipart/form-data" method="POST">
+                <!-- Security Token -->
+                {% csrf_token %}
+                <!-- ---------------------- INTRODUCTION FORM --------------------------->
+        
+                <span class="contact100-form-title">
+                    Thông tin cá nhân của {{ user }}
+                </span>
+                <div style="margin-left: auto; margin-right: 2%;">
+                    <a href="{% url 'logout' %}" class="btn btn-info"> Logout </a>
+                </div>
+                
+                <!-- NAME -->
+                <label class="label-input100" for="first-name">Tên của bạn *</label>
+                <div class="wrap-input100 rs1 validate-input">
+                    <!-- <label>{{ introFORM.firstName.label }}</label> -->
+                    {% render_field introFORM.firstName id="first-name" class="input100" type="text" name="firstName" placeholder="First name" %}
+                    <!-- <input id="first-name" class="input100" type="text" name="firstName" placeholder="First name" {% if introFORM.firstName.is_bound %} value="{{ introFORM.firstName.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.firstName.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="wrap-input100 rs1 validate-input">
+                    <!-- <small>{{ introFORM.lastName.label }}</small> -->
+                    {% render_field introFORM.lastName id="first-name" class="input100" type="text" name="lastName" placeholder="Last name" %}
+
+                    <!-- <input class="input100" type="text" name="lastName" placeholder="Last name" {% if introFORM.lastName.is_bound %} value="{{ introFORM.lastName.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.lastName.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- EMAIL -->
+                <label class="label-input100" for="email">Địa Chỉ Email *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.email id="email" class="input100" type="text" name="email" placeholder="Eg. example@gmail.com" %}
+                    <!-- <input id="email" class="input100" type="text" name="email" placeholder="Eg. example@email.com" {% if introFORM.email.is_bound %} value="{{ introFORM.email.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.email.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- SHORT BIO -->
+                <label class="label-input100" for="message">BIO *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.bio id="message" class="input100" name="bio" rows="2" placeholder="Miêu tả bản thân 500 từ thôi." %}
+                    <!-- <textarea id="message" class="input100" name="bio" rows="5" placeholder="Please enter details about yourself within 500 characters" {% if introFORM.bio.is_bound %} value="{{ introFORM.bio.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.bio.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- ABOUT -->
+                <label class="label-input100" for="message">About Yourself *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.about id="message" class="input100" name="about" rows="5" placeholder="SNói gì về bản thân nào" %}
+                    <!-- <textarea id="message" class="input100" name="about" rows="3" placeholder="Say something about yourself" {% if introFORM.about.is_bound %} value="{{ introFORM.about.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.about.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Address -->
+                <label class="label-input100" for="first-name">Địa chỉ và Số điện thoại*</label>
+                <div class="wrap-input100 rs1 validate-input">
+                    <!-- <small>{{ introFORM.address.label }}</small> -->
+                    {% render_field introFORM.address id="first-name" class="input100" type="text" name="address" placeholder="Địa Chỉ Nhà" %}
+                    <!-- <input id="first-name" class="input100" type="text" name="address" placeholder="Your Address" {% if introFORM.address.is_bound %} value="{{ introFORM.address.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.address.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+
+                <!-- Phone -->
+                <!-- <label class="label-input100" for="phone">Phone Number</label> -->
+                <div class="wrap-input100 rs1 validate-input">
+                    <!-- <small>{{ introFORM.phone.label }}</small> -->
+                    {% render_field introFORM.phone id="phone" class="input100" type="text" name="phone" placeholder=" Số điện thoại: Eg +84 000 00000" %}
+                    <!-- <input id="phone" class="input100" type="text" name="phone" placeholder="Phone. +1 800 00000" {% if introFORM.phone.is_bound %} value="{{ introFORM.phone.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.phone.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <!-- CV -->
+                <label class="label-input100" for="first-name">Tải file CV</label>
+                <div class="wrap-input100 rs1 validate-input">
+                    {{ introFORM.CV }}
+                    <!-- <input id="first-name" class="input100" type="text" name="address" placeholder="Your Address" {% if introFORM.address.is_bound %} value="{{ introFORM.address.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.CV.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Github -->
+                <label class="label-input100" for="email">Link Github</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.github id="email" class="input100" type="text" name="github" placeholder="Eg. https://www.github.com/yourusername" %}
+                    <!-- <input id="email" class="input100" type="text" name="github" placeholder="Eg. example@email.com" {% if introFORM.github.is_bound %} value="{{ introFORM.github.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.github.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Facebook -->
+                <label class="label-input100" for="email">Link Facebook</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.facebook id="email" class="input100" type="text" name="facebook" placeholder="Eg. https://www.facebook.com/yourusername" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="facebook" placeholder="Eg. example@email.com" {% if introFORM.facebook.is_bound %} value="{{ introFORM.facebook.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.facebook.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- linkedin -->
+                <label class="label-input100" for="email">Link LinkedIn</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.linkedin id="email" class="input100" type="text" name="linkedin" placeholder="Eg. https://www.linkedin.com/yourusername" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="linkedin" placeholder="Eg. example@email.com" {% if introFORM.linkedin.is_bound %} value="{{ introFORM.linkedin.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.linkedin.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Instagram -->
+                <label class="label-input100" for="email">Link Instagram</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.instagram id="email" class="input100" type="text" name="instagram" placeholder="Eg. https://www.instagram.com/yourusername" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="instagram" placeholder="Eg. example@email.com" {% if introFORM.instagram.is_bound %} value="{{ introFORM.instagram.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.linkedin.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Other Social Media -->
+                <label class="label-input100" for="email"> Tài khoản mạng xã hội khác</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field introFORM.other id="email" class="input100" type="text" placeholder="Eg. https://www.other.com/yourusername" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="other" placeholder="Eg. example@email.com" {% if introFORM.other.is_bound %} value="{{ introFORM.other.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in introFORM.other.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <hr><br>
+        
+                <!-- ---------------------- EDUCATION FORM --------------------------->
+                        
+                <span class="contact100-form-title">
+                    Chi tiết về Học vấn
+                </span>
+                <!-- TITLE -->
+                <label class="label-input100" for="first-name">Trình độ học vấn*</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Highschool" %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Bachelor/ Highschool" {% if eduFORM.title.is_bound %} value="{{ eduFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Năm  *</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.the_year class="input100" type="text" name="the_year" placeholder="2021" %}
+                    <!-- <input  {% if eduFORM.the_year.is_bound %} value="{{ eduFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Nơi đào tạo  *</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.institute class="input100" type="text" name="institute" placeholder="UIT" %}
+                    <!-- <input  {% if eduFORM.institute.is_bound %} value="{{ eduFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            
+                <!-- Description -->
+                <label class="label-input100" for="message">Miêu tar </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field eduFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về kinh nghiệm học tập này" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this learning experience" {% if eduFORM.decription.is_bound %} value="{{ eduFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div id="educations_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></div>
+                <button id="addmore_edu" class="btn btn-primary" style="margin: 20px;">Thêm trình độ học vấn</button>
+
+                
+                <hr><br>
+
+                <!-- ---------------------- Experience FORM --------------------------->
+                <span class="contact100-form-title">
+                    Kinh Nghiệm
+                </span>
+                <!-- {{ expForm.as_p }} -->
+                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Vai trò và Năm kinh nghiệm*</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" %}
+
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" {% if expFORM.title.is_bound %} value="{{ expFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Năm  *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.the_year class="input100" type="text" name="the_year" placeholder="2022" %}
+
+                    <!-- <input class="input100" type="text" name="the_year" placeholder="2021" {% if expFORM.the_year.is_bound %} value="{{ expFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Tên công ty *</label>
+                <div class="wrap-input100">
+                    {% render_field expFORM.institute class="input100" type="text" name="institute" placeholder="Google" %}
+                    <!-- <input class="input100" type="text" name="institute" placeholder="Microsoft" {% if expFORM.institute.is_bound %} value="{{ expFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Miêu tả </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về kinh nghiệm làm việc này" %}
+
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if expFORM.decription.is_bound %} value="{{ expFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <ol id="experiences_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_exp" class="btn btn-primary" style="margin: 20px;">Thêm kinh nghiệm</button>
+
+                <br><br>
+                <!-- ---------------------- Project Details FORM --------------------------->
+                        
+                <span class="contact100-form-title">
+                    Các dự án
+                </span>
+
+
+                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Tên dự án*</label>
+                <div class="wrap-input100">
+                    {% render_field projectFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Portfolio website" %}
+                    <!-- <input  {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Image Link -->
+                <label class="label-input100" for="email">Liên kết hình ảnh tới dự án</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. google photos link" %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if projectFORM.imagelink.is_bound %} value="{{ projectFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Demo -->
+                <label class="label-input100" for="email">Link video demo</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.demo id="email" class="input100" type="text" name="demo" placeholder="Eg. Youtube Video Link" %}
+                    <!-- <input  {% if projectFORM.demo.is_bound %} value="{{ projectFORM.demo.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.demo.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- github_project -->
+                <label class="label-input100" for="email">GitHub Link</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. github repo link" %}
+                    <!-- <input id="email" class="input100" type="text" name="github_project" placeholder="Eg. example@email.com" {% if projectFORM.github_project.is_bound %} value="{{ projectFORM.github_project.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.github_project.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Mô tả dự án </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về dự án này" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if projectFORM.decription.is_bound %} value="{{ projectFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Project Rating  -->
+                <label class="label-input100" for="first-name">Đánh giá dự án của bạn</label>
+                <div>
+                    {% render_field projectFORM.projectRating %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Portfolio Maker" {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.projectRating.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <ol id="projects_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_project" class="btn btn-primary" style="margin: 20px;">Thêm các dự án khác</button>
+
+
+                <br>
+                
+ <!-- ---------------------- Skillset Details FORM --------------------------->
+                <span class="contact100-form-title">
+                    Thông tin chi tiết về bộ kỹ năng
+                </span>
+                
+                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Tên kỹ năng*</label>
+                <div class="wrap-input100">
+                    {% render_field skillFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Django" %}
+                    <!-- <input  {% if skillFORM.title.is_bound %} value="{{ skillFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Imagelink Link -->
+                <label class="label-input100" for="email">Hình ảnh về kỹ năng đó</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Your skillset logo link" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Skillrank -->
+                <label class="label-input100" for="email">Chọn cấp độ kỹ năng này</label>
+                <div>
+                    {% render_field skillFORM.skillrank %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.skillrank.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                 <!-- Description -->
+                <label class="label-input100" for="message">Miêu tả kỹ năng </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về bộ kỹ năng và kinh nghiệm của bạn" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if skillFORM.description.is_bound %} value="{{ skillFORM.description.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <ol id="skillsets_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_skills" class="btn btn-primary" style="margin: 20px;">Thêm kỹ năng</button>
+
+                <br><br>
+
+
+                <!-- <input type="submit" value="submit"> -->
+                <div class="container-contact100-form-btn">
+                    <button class="contact100-form-btn" type="submit">
+                        <span>
+                            Nộp
+                            <i class="zmdi zmdi-arrow-right m-l-8"></i>
+                        </span>
+                    </button>
+                </div>
+                 
+
+            </form>
+        </div>
+    </div>
+
+
+
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/animsition/js/animsition.min.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/bootstrap/js/popper.js'%}"></script>
+    <script src="{% static 'createForm/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/select2/select2.min.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/daterangepicker/moment.min.js'%}"></script>
+    <script src="{% static 'createForm/vendor/daterangepicker/daterangepicker.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/countdowntime/countdowntime.js'%}"></script>
+<!--===============================================================================================-->
+    <script src="{% static 'createForm/js/main.js'%}"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const submit = document.querySelector('#submit');
+
+    document.querySelector('#addmore_exp').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Experienced Role and Year*</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" %}
+
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Junior Developer/ Front End Dev" {% if expFORM.title.is_bound %} value="{{ expFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Year  *</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.the_year class="input100" type="text" name="the_year" placeholder="2021" %}
+
+                    <!-- <input class="input100" type="text" name="the_year" placeholder="2021" {% if expFORM.the_year.is_bound %} value="{{ expFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Company Name  *</label>
+                <div class="wrap-input100">
+                    {% render_field expFORM.institute class="input100" type="text" name="institute" placeholder="Microsoft" %}
+                    <!-- <input class="input100" type="text" name="institute" placeholder="Microsoft" {% if expFORM.institute.is_bound %} value="{{ expFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field expFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience " %}
+
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if expFORM.decription.is_bound %} value="{{ expFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in expFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>`
+        document.querySelector('#experiences_added').append(li);
+        return false;
+    }
+    
+    document.querySelector('#addmore_edu').onclick = () => {
+        const p = document.createElement('p');
+        p.innerHTML = `<!-- TITLE -->
+                <label class="label-input100" for="first-name">Level of Education*</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Highschool" %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Bachelor/ Highschool" {% if eduFORM.title.is_bound %} value="{{ eduFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- YEAR -->
+                <label class="label-input100" for="first-name">Year  *</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.the_year class="input100" type="text" name="the_year" placeholder="2021" %}
+                    <!-- <input  {% if eduFORM.the_year.is_bound %} value="{{ eduFORM.the_year.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.the_year.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            
+                <!-- Name of Institute -->
+                <label class="label-input100" for="first-name">Institution Name  *</label>
+                <div class="wrap-input100">
+                    {% render_field eduFORM.institute class="input100" type="text" name="institute" placeholder="Harvard" %}
+                    <!-- <input  {% if eduFORM.institute.is_bound %} value="{{ eduFORM.institute.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.institute.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            
+                <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field eduFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this learning experience" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this learning experience" {% if eduFORM.decription.is_bound %} value="{{ eduFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in eduFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>`;
+        document.querySelector('#educations_added').append(p);
+        return false;
+    }
+
+    document.querySelector('#addmore_project').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `<!-- TITLE  -->
+                <label class="label-input100" for="first-name">Project Name*</label>
+                <div class="wrap-input100">
+                    {% render_field projectFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Todo App" %}
+                    <!-- <input  {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Image Link -->
+                <label class="label-input100" for="email">Image-Link to project</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. google photos link" %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if projectFORM.imagelink.is_bound %} value="{{ projectFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Demo -->
+                <label class="label-input100" for="email">Link to Demo Video</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.demo id="email" class="input100" type="text" name="demo" placeholder="Eg. Youtube Video Link" %}
+                    <!-- <input  {% if projectFORM.demo.is_bound %} value="{{ projectFORM.demo.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.demo.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- github_project -->
+                <label class="label-input100" for="email">Github link of the Project</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. github repo link" %}
+                    <!-- <input id="email" class="input100" type="text" name="github_project" placeholder="Eg. example@email.com" {% if projectFORM.github_project.is_bound %} value="{{ projectFORM.github_project.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.github_project.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this project" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if projectFORM.decription.is_bound %} value="{{ projectFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Project Rating  -->
+                <label class="label-input100" for="first-name">Rate Your Project</label>
+                <div>
+                    {% render_field projectFORM.projectRating %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Portfolio Maker" {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.projectRating.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>`;
+        document.querySelector('#projects_added').append(li);
+        return false;
+    }
+
+    document.querySelector('#addmore_skills').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `<!-- TITLE  -->
+                <label class="label-input100" for="first-name">Skillset Name*</label>
+                <div class="wrap-input100">
+                    {% render_field skillFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Django" %}
+                    <!-- <input  {% if skillFORM.title.is_bound %} value="{{ skillFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Imagelink Link -->
+                <label class="label-input100" for="email">Logo-link to the Skillset</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Your skillset logo link" %}
+
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Skillrank -->
+                <label class="label-input100" for="email">Select your this skill level</label>
+                <div>
+                    {% render_field skillFORM.skillrank %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.skillrank.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                 <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about your skillset and experience" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if skillFORM.description.is_bound %} value="{{ skillFORM.description.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in skillFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>` 
+        document.querySelector('#skillsets_added').append(li);
+        return false;
+    }
+
+
+  });
+</script>
+
+</body>
+</html>

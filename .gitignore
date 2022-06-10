@@ -1,0 +1,8 @@
+# database
+*.sqlite3
+
+# Ignore files related to API keys
+*.env
+
+0001_initial.py
+0002_informationmodel_fewwords.py

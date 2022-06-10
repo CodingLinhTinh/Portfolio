@@ -1,0 +1,14 @@
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        {{ user }}
+        <!-- form as paragraph -->
+        Bạn có chắc xóa cái này không?
+ 
+        <input type="submit" value="Yes" />
+        <a href="{% url 'update_information' %}">Cancel</a>
+    </form>
+ 
+</div>

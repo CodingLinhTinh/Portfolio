@@ -1,0 +1,109 @@
+{% extends "user_interface/update/layout_update.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+            <div class="main">
+                <div class="container" style="margin-left: 50%;">
+                    <a href="{% url 'delete_skillset' current_id %}">
+					<button class=" btn btn-danger contact100-form-btn" type="submit">
+						<span>
+                            Xóa dữ liệu hiện tại
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button></a>
+				</div>
+
+			  <!-- Create a Form -->
+              <form method="POST">
+                <!-- Security token by Django -->
+                {% csrf_token %}
+                {{ user }}
+                <!-- form as paragraph -->
+                {{ skillFORM.as_p }}
+         
+                <input type="submit" value="Update">
+              </form>
+                <ul class="pager">
+                    <li class="previous"><a href="{% url 'update_skillset' previous_id  %}">Xem các phần khác</a></li>
+                    <li class="next"><a href="{% url 'update_skillset' next_id  %}">Xem các mục khác</a></li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-23581568-13');
+  
+    document.addEventListener('DOMContentLoaded', function() {
+      const submit = document.querySelector('#submit');
+    
+      document.querySelector('#addmore_skills').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `<!-- TITLE  -->
+				<label class="label-input100" for="first-name">Skillset Name*</label>
+				<div class="wrap-input100">
+                    {% render_field skillFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Django" %}
+					<!-- <input  {% if skillFORM.title.is_bound %} value="{{ skillFORM.title.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Imagelink Link -->
+				<label class="label-input100" for="email">Logo-link to the Skillset</label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. Your skillset logo link" %}
+
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                <!-- Skillrank -->
+				<label class="label-input100" for="email">Select your this skill level</label>
+				<div>
+                    {% render_field skillFORM.skillrank %}
+					<!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if skillFORM.imagelink.is_bound %} value="{{ skillFORM.imagelink.value }}" {% endif %}> -->
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.skillrank.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div>
+
+                 <!-- Description -->
+				<!-- <label class="label-input100" for="message">Description </label>
+				<div class="wrap-input100 validate-input">
+                    {% render_field skillFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about your skillset and experience" %}
+					<span class="focus-input100"></span>
+                    {% for error in skillFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+				</div> -->` 
+        document.querySelector('#skillsets_added').append(li);
+        return false;
+    }
+
+
+ 
+  
+    });
+  </script>
+{% endblock %}
+

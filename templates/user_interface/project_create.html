@@ -1,0 +1,213 @@
+{% extends "user_interface/layout_create.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" enctype="multipart/form-data" method="POST" action="{% url 'project' %}">
+                <!-- Security Token -->
+                {% csrf_token %}
+                <!-- ---------------------- FORM --------------------------->
+        
+                <span class="contact100-form-title">
+                    Chi tiết dự án/Thông tin của {{ user }}
+                </span>
+                <!-- <div style="margin-left: auto; margin-right: 2%;">
+                    <a href="{% url 'logout' %}" class="btn btn-info"> Logout </a>
+                </div> -->
+                
+<!-- ---------------------- Project Details FORM --------------------------->
+                <br>
+
+                <!-- TITLE  -->
+                <label class="label-input100" for="first-name">Tên dự án*</label>
+                <div class="wrap-input100">
+                    {% render_field projectFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Portfolio Website" %}
+                    <!-- <input  {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Image Link -->
+                <label class="label-input100" for="email">Liên kết hình ảnh tới dự án</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. google photos link" %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if projectFORM.imagelink.is_bound %} value="{{ projectFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Demo -->
+                <label class="label-input100" for="email">Link Demo Video</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.demo id="email" class="input100" type="text" name="demo" placeholder="Eg. Youtube Video Link" %}
+                    <!-- <input  {% if projectFORM.demo.is_bound %} value="{{ projectFORM.demo.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.demo.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- github_project -->
+                <label class="label-input100" for="email">Github</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. github repo link" %}
+                    <!-- <input id="email" class="input100" type="text" name="github_project" placeholder="Eg. example@email.com" {% if projectFORM.github_project.is_bound %} value="{{ projectFORM.github_project.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.github_project.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Mô tả dự án </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.description id="message" class="input100" name="description" rows="5" placeholder="Viết ngắn gọn về dự án này" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if projectFORM.decription.is_bound %} value="{{ projectFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Project Rating  -->
+                <label class="label-input100" for="first-name">Đánh giá dự án của bạn</label>
+                <div>
+                    {% render_field projectFORM.projectRating %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Portfolio Maker" {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.projectRating.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <!-- <ol id="projects_added" class="wrap-contact100" style="margin: 0; padding: 0; " ></ol>
+                <button id="addmore_project" class="btn btn-primary" style="margin: 20px;">Add More Projects</button> -->
+                <br>
+
+                
+
+                <!-- <input type="submit" value="submit"> -->
+				<div class="container-contact100-form-btn">
+                    <a href="{% url 'skillset' %}">
+					<button class="contact100-form-btn" type="submit">
+						<span>
+                            Thêm nữa
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button></a>
+				</div>
+                 
+                <ol>
+                    Phần trước
+                    {% for item in projects %}
+                        <li><h2>{{ item.title }}</h2></li>
+                        <li><p>{{ item.description }} </p></li>
+                        <li><img src="{{ item.imagelink }}" alt="{{ item.title }}" height="200px" width="200px"></li>
+                        <br>
+                    {% endfor %}
+                </ol>
+
+			</form>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-23581568-13');
+  
+    document.addEventListener('DOMContentLoaded', function() {
+      const submit = document.querySelector('#submit');
+    
+      document.querySelector('#addmore_project').onclick = () => {
+        const li = document.createElement('li');
+        li.innerHTML = `<!-- TITLE  -->
+                <label class="label-input100" for="first-name">Project Name*</label>
+                <div class="wrap-input100">
+                    {% render_field projectFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Todo App" %}
+                    <!-- <input  {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.title.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Image Link -->
+                <label class="label-input100" for="email">Image-Link to project</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.imagelink id="email" class="input100" type="text" name="imagelink" placeholder="Eg. google photos link" %}
+                    <!-- <input id="email" class="input100" type="text" name="imagelink" placeholder="Eg. example@email.com" {% if projectFORM.imagelink.is_bound %} value="{{ projectFORM.imagelink.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.imagelink.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Demo -->
+                <label class="label-input100" for="email">Link to Demo Video</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.demo id="email" class="input100" type="text" name="demo" placeholder="Eg. Youtube Video Link" %}
+                    <!-- <input  {% if projectFORM.demo.is_bound %} value="{{ projectFORM.demo.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.demo.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- github_project -->
+                <label class="label-input100" for="email">Github link of the Project</label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.github_project id="email" class="input100" type="text" name="github" placeholder="Eg. github repo link" %}
+                    <!-- <input id="email" class="input100" type="text" name="github_project" placeholder="Eg. example@email.com" {% if projectFORM.github_project.is_bound %} value="{{ projectFORM.github_project.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.github_project.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Description -->
+                <label class="label-input100" for="message">Description </label>
+                <div class="wrap-input100 validate-input">
+                    {% render_field projectFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this project" %}
+                    <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this working experience" {% if projectFORM.decription.is_bound %} value="{{ projectFORM.decription.value }}" {% endif %}></textarea> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.description.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <!-- Project Rating  -->
+                <label class="label-input100" for="first-name">Rate Your Project</label>
+                <div>
+                    {% render_field projectFORM.projectRating %}
+                    <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Portfolio Maker" {% if projectFORM.title.is_bound %} value="{{ projectFORM.title.value }}" {% endif %}> -->
+                    <span class="focus-input100"></span>
+                    {% for error in projectFORM.projectRating.errors %}
+                        <span class="text-danger ml-2">{{ error }}</span>
+                    {% endfor %}
+                </div>`;
+        document.querySelector('#projects_added').append(li);
+        return false;
+    }
+
+ 
+  
+    });
+  </script>
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends "user_interface/update/layout_update.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<div class="main">
+                <div class="container" style="margin-left: 50%;">
+                    <a href="{% url 'delete_information' current_information_id %}">
+					<button class=" btn btn-danger contact100-form-btn" type="submit">
+						<span>
+                            Xóa dự liệu hiện tại
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button></a>
+				</div>
+                <!-- Create a Form -->
+                <form method="POST">
+                    <!-- Security token by Django -->
+                    {% csrf_token %}
+                    {{ user }}
+                    <!-- form as paragraph -->
+                    {{ introFORM.as_p }}
+             
+                    <input type="submit" value="Update">
+                </form>
+             
+            </div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,159 @@
+{% extends "user_interface/update/layout_update.html" %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<div class="main">
+                <div class="container" style="margin-left: 50%;">
+                    <a href="{% url 'delete_education' current_id %}">
+					<button class=" btn btn-danger contact100-form-btn" type="submit">
+						<span>
+                            Xóa dữ liệu hiện tại
+							<i class="zmdi zmdi-arrow-right m-l-8"></i>
+						</span>
+					</button></a>
+				</div>
+                <!-- Create a Form -->
+                <form method="POST">
+                    <!-- Security token by Django -->
+                    {% csrf_token %}
+                    {{ user }}
+                    <!-- form as paragraph -->
+                    {{ eduFORM.as_p }}
+
+                    <input type="submit" value="Update">
+                </form>
+                <ul class="pager">
+                    <li class="previous"><a href="{% url 'update_education' previous_id  %}">Trước</a></li>
+                    <li class="next"><a href="{% url 'update_education'  next_id  %}">Sau</a></li>
+                  </ul>
+                
+                <input type="hidden" id="myVar" name="variable" value="{{ user.username }}">
+
+            </div>
+		</div>
+	</div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+    
+            //1. We need to have current user information
+            //2. Call the api view for the portfolio user
+            //3. Typewriter effect function
+            var myVar = document.getElementById("myVar").value;
+            console.log(myVar, "<- Passed from  Education script");
+    
+            userInformation(myVar);
+        });
+    
+    
+        function userInformation(username){
+            const xhr = new XMLHttpRequest()
+            const method = "GET"
+            const url = `/api/${username}`
+            const responseType = "json"
+            xhr.responseType = responseType
+            xhr.open(method, url)
+            xhr.onload = function(){
+                const serverResponse = xhr.response
+                const education = serverResponse.education
+                console.log("Education Script Info ->", education)
+
+                // console.log("ID Info ->", education[0].id)
+                //  var x = education[0].id
+
+                //  console.log(string_text)
+
+            }
+            xhr.send()
+        }
+    
+    
+    </script>
+
+
+{% endblock %}
+
+
+{% block script %}
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const submit = document.querySelector('#submit');
+
+      document.querySelector('#addmore_edu').onclick = () => {
+          const p = document.createElement('p');
+          p.innerHTML = `<!-- TITLE -->
+                  <label class="label-input100" for="first-name">Level of Education*</label>
+                  <div class="wrap-input100">
+                      {% render_field eduFORM.title id="first-name" class="input100" type="text" name="title" placeholder="Highschool" %}
+                      <!-- <input id="first-name" class="input100" type="text" name="title" placeholder="Bachelor/ Highschool" {% if eduFORM.title.is_bound %} value="{{ eduFORM.title.value }}" {% endif %}> -->
+                      <span class="focus-input100"></span>
+                      {% for error in eduFORM.title.errors %}
+                          <span class="text-danger ml-2">{{ error }}</span>
+                      {% endfor %}
+                  </div>
+                  <!-- YEAR -->
+                  <label class="label-input100" for="first-name">Year  *</label>
+                  <div class="wrap-input100">
+                      {% render_field eduFORM.the_year class="input100" type="text" name="the_year" placeholder="2021" %}
+                      <!-- <input  {% if eduFORM.the_year.is_bound %} value="{{ eduFORM.the_year.value }}" {% endif %}> -->
+                      <span class="focus-input100"></span>
+                      {% for error in eduFORM.the_year.errors %}
+                          <span class="text-danger ml-2">{{ error }}</span>
+                      {% endfor %}
+                  </div>
+
+                  <!-- Name of Institute -->
+                  <label class="label-input100" for="first-name">Institution Name  *</label>
+                  <div class="wrap-input100">
+                      {% render_field eduFORM.institute class="input100" type="text" name="institute" placeholder="Harvard" %}
+                      <!-- <input  {% if eduFORM.institute.is_bound %} value="{{ eduFORM.institute.value }}" {% endif %}> -->
+                      <span class="focus-input100"></span>
+                      {% for error in eduFORM.institute.errors %}
+                          <span class="text-danger ml-2">{{ error }}</span>
+                      {% endfor %}
+                  </div>
+
+                  <!-- Description -->
+                  <label class="label-input100" for="message">Description </label>
+                  <div class="wrap-input100 validate-input">
+                      {% render_field eduFORM.description id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this learning experience" %}
+                      <!-- <textarea id="message" class="input100" name="description" rows="5" placeholder="Briefly write about this learning experience" {% if eduFORM.decription.is_bound %} value="{{ eduFORM.decription.value }}" {% endif %}></textarea> -->
+                      <span class="focus-input100"></span>
+                      {% for error in eduFORM.description.errors %}
+                          <span class="text-danger ml-2">{{ error }}</span>
+                      {% endfor %}
+                  </div>`;
+          document.querySelector('#educations_added').append(p);
+          return false;
+      }
+
+
+
+    });
+  </script>
+{% endblock %}
+

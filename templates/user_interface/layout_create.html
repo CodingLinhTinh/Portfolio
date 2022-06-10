@@ -1,0 +1,210 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+
+<head>
+  <title>TẠO Portfolio</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="{% static 'createForm/css/material-dashboard.css' %}" rel="stylesheet" />
+
+<!--===============================================================================================-->
+<link rel="icon" type="image/png" href="{% static 'createForm/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/bootstrap/css/bootstrap.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/fonts/iconic/css/material-design-iconic-font.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/animate/animate.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/css-hamburgers/hamburgers.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/animsition/css/animsition.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/vendor/select2/select2.min.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm//daterangepicker/daterangepicker.css'%}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/css/util.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'createForm/css/main.css' %}">
+<!--===============================================================================================-->
+
+</head>
+
+<body>
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+          <small>Profile của - </small>
+          <br>
+          {{ user }} 
+        </a>
+        <a href="{% url 'logout' %}" class="btn btn-info" style="margin: 0;margin-left: 30%; "> Logout </a>
+        <!-- <div style="margin: 10%"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'information' %}">
+              <i class="material-icons">G</i>
+              <p style="color: #fff;">Giới thiệu</p>
+            </a>
+          </li>
+
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'education' %}">
+              <i class="material-icons">H</i>
+              <p style="color: #fff;">Học vấn</p>
+            </a>
+          </li>
+
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'experience' %}">
+              <i class="material-icons">dashboard</i>
+              <p style="color: #fff;">Kinh nghiệm</p>
+            </a>
+          </li>
+
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'project' %}">
+              <i class="material-icons">D</i>
+              <p style="color: #fff;">Dự án</p>
+            </a>
+          </li>
+
+          <li class="nav-item active  ">
+            <a class="nav-link" href="{% url 'skillset' %}">
+              <i class="material-icons">K</i>
+              <p style="color: #fff;">Kỹ năng</p>
+            </a>
+          </li>
+          <!-- your sidebar here -->
+          <div style="margin: 10%">
+            <a href="{% url 'portfolio' user %}" class="btn btn-info nav-item active  ">Portfolio của tôi </a>
+          </div>          
+          <hr>
+          <li class="nav-item active  ">
+            <div style="margin: 10%">
+              <a href="{% url 'update_information' %}" class="btn btn-secondary"> 
+                <i class="material-icons"></i>
+                <p>CẬP NHẬT</p> 
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <!--<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">{{ user }}</a>
+          </div>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+              </li>
+
+              your navbar here
+
+            </ul>
+          </div> 
+        </div>
+      </nav>-->
+      {% block body %}
+
+      {% endblock %}
+      
+
+      
+      
+      <!-- End Navbar -->
+      <!-- <div class="content">
+        <div class="container-fluid">
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="https://www.creative-tim.com">
+                  Creative Tim
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, made with <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          </div>
+        </div>
+      </footer> 
+    </div>
+  </div>-->
+
+  
+<!--===============================================================================================-->
+  <script src="{% static 'createForm/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/animsition/js/animsition.min.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/bootstrap/js/popper.js'%}"></script>
+    <script src="{% static 'createForm/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/select2/select2.min.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/daterangepicker/moment.min.js'%}"></script>
+    <script src="{% static 'createForm/vendor/daterangepicker/daterangepicker.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/vendor/countdowntime/countdowntime.js'%}"></script>
+  <!--===============================================================================================-->
+    <script src="{% static 'createForm/js/main.js'%}"></script>
+  
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-23581568-13');
+  
+  </script>
+  
+  {% block script %}
+  {% endblock %}
+  
+</body>
+
+</html>
